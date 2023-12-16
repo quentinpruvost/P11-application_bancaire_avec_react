@@ -1,0 +1,6 @@
+@use '../../sass/color';
+
+.header {
+  color: color.$neutral-fourth-color;
+  margin-bottom: 2rem;
+}

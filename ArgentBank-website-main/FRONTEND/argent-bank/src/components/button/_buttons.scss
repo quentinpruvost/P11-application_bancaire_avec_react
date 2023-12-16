@@ -1,0 +1,50 @@
+@use '../../sass/color';
+
+.link-button{
+  text-decoration: none;
+}
+
+.sign-in-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: color.$main-color;
+  background-color: color.$main-color;
+  border-right: color.$main-color;
+  border-bottom: color.$main-color ;
+  color: color.$neutral-fourth-color;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.transaction-button{
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: color.$main-color;
+  background-color: color.$main-color;
+  color: color.$neutral-fourth-color;
+  cursor: pointer;
+}
+
+
+
+@media (min-width: 720px) {
+  .transaction-button {
+    width: 200px;
+  }
+}
+
+.edit-button {
+  border-color: color.$main-color;
+  background-color: color.$main-color;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+}
