@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 // import Button from "../button/button";
-import { login } from "../../redux/reducers/userReducer"
-import { useDispatch } from 'react-redux';
+// import { login } from "../../api/fetch"
+
+import { useDispatch } from "react-redux";
+// import { loginUser } from '../../api/authThunk';
+import { getloginUser } from '../../redux/reducers/test';
+import { useNavigate } from 'react-router-dom';
 
 function Form() {
+  const navigate = useNavigate(); 
+
   // Send actions to the redux store. 
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
@@ -11,12 +17,17 @@ function Form() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login({email, password}))
+    //dispatch(loginUser({email, password}));
+    dispatch(getloginUser({email, password}))
+      .then(() => {
+        navigate('/profile')
+      })
+      .catch((error) => {})
     
-  }
 
+  }
   return (
-    <section className="sign-in-content">
+    <section className="sign-in-content" id="formWindow">
       <i className="fa fa-user-circle"></i>
       <h1>Sign In</h1>
       <form onSubmit={handleLogin}>
@@ -40,11 +51,12 @@ function Form() {
             required
           />
         </div>
+        <p className="errorMessage" id="textErrorMessage"></p>
         <div className="input-remember">
           <input type="checkbox" id="remember-me" />
           <label htmlFor="remember-me">Remember me</label>
         </div>
-        <input type="submit" onClick={handleLogin} value="Sign In" className="sign-in-button" />
+        <input type="submit" value="Sign In" className="sign-in-button" />
         
         
       </form>
@@ -53,13 +65,3 @@ function Form() {
 }
 
 export default Form;
-
-/**
- * 
- * <Button
-          type="submit"
-          text="Sign In"
-          classStyle="sign-in-button"
-        />
- * 
- */

@@ -3,13 +3,20 @@ import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import Form from "../../components/form/form";
 
+import { useSelector } from "react-redux";
+
 function Login(){
+
+  console.log(
+    useSelector((store) => {console.log(store)})
+  )
+
   return(
     <div>
       <Nav 
         Text="Sign In"
       />
-      <main class="main bg-dark" >
+      <main className="main bg-dark" >
         <Form />
       </main>
       <Footer />

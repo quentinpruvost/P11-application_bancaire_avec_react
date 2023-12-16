@@ -5,13 +5,27 @@ import Welcome from "../../components/welcome/welcome";
 import Account from "../../components/account/account";
 
 
+import { useSelector } from "react-redux";
+
 function User(){
+
+  const userName = useSelector((state) => state.auth.userName)
+  // const profileData = useSelector((state) => state.auth.body)
+  //console.log('*****' + profileData.profileData)
+  // const userName = profileData ? profileData.userName : "No"
+
   const token = sessionStorage.getItem('token');
   console.log("token : ", token)
 
   function SignOut(){
     sessionStorage.removeItem('token')
   }
+
+  // To be able to see state of the Slices in the console
+    console.log(
+      useSelector((store) => {console.log(store)})
+    )
+  //
 
   return(
     <div> 
@@ -22,11 +36,11 @@ function User(){
         Function={SignOut}
         Link="/"
       />
-      <main class="main bg-dark">
+      <main className="main bg-dark">
         <Welcome 
-          Name="Tony"
+          Name={userName}
         />
-        <h2 class="sr-only">Accounts</h2>
+        <h2 className="sr-only">Accounts</h2>
         <Account 
           Title="Argent Bank Checking"
           Number="x8349"

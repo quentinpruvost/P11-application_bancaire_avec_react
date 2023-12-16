@@ -4,33 +4,33 @@ import argentBankLogo from './argentBankLogo.webp';
 function Nav({Name, Text, Icon, Link , Function}){
 
   return(
-    <nav class="main-nav">
+    <nav className="main-nav">
       
-      <a class="main-nav-logo" href="./">
+      <a className="main-nav-logo" href="./">
         <img
           src={argentBankLogo}
-          class="main-nav-logo-image"
+          className="main-nav-logo-image"
           alt="Argent Bank Logo"
         />
-        <h1 class="sr-only">Argent Bank</h1>
+        <h1 className="sr-only">Argent Bank</h1>
       </a>
 
-      <div class="main-nav-links">
-        <a class="main-nav-item-1" href='/login'>
-          <i class="fa fa-user-circle"></i>
+      <div className="main-nav-links">
+        <a className="main-nav-item-1" href='/login'>
+          <i className="fa fa-user-circle"></i>
         </a>
         {Name && (
-          <a class="main-nav-item-1" href='/'>
-            <p class="main-nav-name">{Name}</p>
+          <a className="main-nav-item-1" href='/'>
+            <p className="main-nav-name">{Name}</p>
           </a>
         )}
         {Icon && (
-          <a class="main-nav-item-2" href='/'>
-            <i class={Icon}></i>
+          <a className="main-nav-item-2" href='/'>
+            <i className={Icon}></i>
           </a>
         )}
-        <a class="main-nav-item-2" href={Link} onClick={Function}>
-          <p class="main-nav-text">{Text}</p>
+        <a className="main-nav-item-2" href={Link} onClick={Function}>
+          <p className="main-nav-text">{Text}</p>
         </a>
       </div>
     </nav>
