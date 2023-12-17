@@ -1,3 +1,4 @@
+// Import the images for the Hero section in 2 sizes. 
  import bankTree from './bank-tree.webp';
  import bankTreeBig from './bank-tree-big.webp'
 
@@ -6,7 +7,6 @@ function Hero(){
   return(
     <div className="hero">
       <img 
-        
         srcSet={`${bankTree} 920w, ${bankTreeBig}`}
         sizes="(max-width: 920px) 920px, 1440px"
         src={bankTree} 

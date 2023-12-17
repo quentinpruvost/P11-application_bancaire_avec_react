@@ -1,6 +1,7 @@
+// Import the logo of Argent Bank
 import argentBankLogo from './argentBankLogo.webp';
 
-
+// This is my nav component that is rendered at every page. 
 function Nav({Name, Text, Icon , Function, logoLink, iconLink, signInLink, profileLink}){
 
   return(

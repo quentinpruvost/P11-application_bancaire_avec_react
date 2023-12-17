@@ -1,6 +1,6 @@
 
 
-
+// This is my welcome component that is rendered in the User page
 function Welcome({Name, onEditClick}){
   return(
     <div className="header">

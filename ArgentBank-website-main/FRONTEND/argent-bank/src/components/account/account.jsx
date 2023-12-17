@@ -1,5 +1,8 @@
+// Import the button component
 import Button from "../button/button";
 
+
+// This is my Accounct component that render the user Account on the User page.
 function Account({Title,Number, Amount, Description}){
   return(
     <section className="account">

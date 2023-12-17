@@ -1,55 +1,48 @@
+// Import hooks from react and redux librairy
 import React, { useState } from "react";
-
 import { useDispatch } from "react-redux";
-import { getloginUser } from '../../redux/reducers/authSlice';
 import { useNavigate } from 'react-router-dom';
+
+import { getloginUser } from '../../redux/reducers-And-Fetchs/authSlice';
+
+// Import the store 
 import store from '../../redux/store'
 
+// This is the Form component that is used to the Login page 
 function Form() {
   const navigate = useNavigate(); 
-
   const dispatch = useDispatch();
+  /**
+   * @variable email set with value ''
+   * @function setEmail - responsible to change the value
+   */
   const [email, setEmail] = useState('');
+  /**
+   * @variable password set with value ''
+   * @function setPassword - responsible to change the value
+   */
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
 
-  //
-
+  /**
+   * @function handleLogin with 'e' as parameter
+   * 
+   */
   const handleLogin = (e) => {
+    // Prevent the page refreash when form is submitted
     e.preventDefault();
-    setError(null);
-  
+    // Send the email and password information with the getloginUser action
     dispatch(getloginUser({ email, password }))
-      .then(() => {
-        // to use getState need to access the store
-        const isAuthenticated = store.getState().auth.isAuthenticated;
-        if (isAuthenticated) {
-          // Redirect to /profile if successful login
-          navigate('/profile');
-        } else {
-          // Handle unsuccessful login
-          setError("Login failed at form.jsx, "); 
-          console.log('error : ' , error)
-        }
-      })
-      .catch((error) => {
-        setError(error.message || 'Login failed');
-      });
-  };
 
-  //
-  /** 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    dispatch(getloginUser({email, password}))
-      
-    
-     setTimeout(() => {
-      navigate('/profile')
-     }, 1500) ;
-    
-  }
-  */
+    .then(() => {
+      // use getState to access the state in the store
+      const isAuthenticated = store.getState().auth.isAuthenticated;
+      // check if the user is Authenticated
+      if (isAuthenticated) {
+        // Redirect to the profile page if successful login
+        navigate('/profile');
+      } 
+    })   
+  };
 
   return (
     <section className="sign-in-content" id="formWindow">
@@ -82,8 +75,6 @@ function Form() {
           <label htmlFor="remember-me">Remember me</label>
         </div>
         <input type="submit" value="Sign In" className="sign-in-button" />
-        
-        
       </form>
     </section>
   );

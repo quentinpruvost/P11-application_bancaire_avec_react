@@ -1,16 +1,10 @@
-
+// Import the components that are rendered in the Login page
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import Form from "../../components/form/form";
 
-import { useSelector } from "react-redux";
-
+// This is the Login component that gather other smaller components
 function Login(){
-
-  console.log(
-    useSelector((store) => {console.log(store)})
-  )
- 
   return(
     <div>
       <Nav 

@@ -101,6 +101,154 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+#------------------------------------------------------------------
+#----- These are the transaction path proposal
+  /transaction/summary:
+    get:
+      security:
+        - Bearer: []
+      tags:
+      - User Transactions
+      summary: Get summary of all accounts
+      description: Extract the amount, name of all the accounts
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Accounts summary extract successfully
+          schema:
+            $ref: '#/definitions/TransactionSummary'
+        '401':
+          description: Unauthorized request ( missing or expired token )
+        '500':
+          description: Internal Server Error
+
+  /transactions/{account}/{year}/{month}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Get user's transaction by account
+      description: Extract the user's transaction by sorting them by type of account year and month
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: year
+          description: Retrieve a transaction from a year
+          required: true
+          type: integer
+        - in: path
+          name: month
+          description: Retrieve a transaction from a month
+          required: true
+          type: integer
+        - in: path
+          name: account
+          description: name of the account
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Transaction information extract successfully
+          schema: 
+            $ref: '#/definitions/TransactionHistory'
+        '400': 
+          description: Invalid year or month
+        '401':
+          description: Unauthorized request (missing or expired token)
+        '500':
+          description: Internal Server Error
+        
+  /transactions/{transactionId}:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Add a transaction note
+      description: It is possible to add a note about a single transaction to personnalize the information
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: transactionId
+          description: The ID of the note to be create
+          required: true
+          type: string
+        - in: body
+          name: note
+          description: add a note about a transaction
+          required: true
+          schema:
+            $ref: '#/definitions/AddTransactionNote'
+      responses:
+        '200':
+          description: Note added successfully
+        '401':
+          description: Unauthorized request (missing or expired token)
+        '500':
+          description: Internal Server Error
+
+  /transactions/{transactionId}/note:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Delete a transaction note
+      description: Delete a information note that was added by a user to a specific transaction
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: transactionId
+          description: The ID of the transaction where the note needs to be deleted.
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Note deleted successfully
+          schema:
+            $ref: '#/definitions/DeletedNote'
+        '401':
+          description: Unauthorized request (missing or expired token)
+        '500':
+          description: Internal Server Error
+
+  /transactions/{transactionId}/categories:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Change a transaction category
+      description: A user is able to change the category of a transaction
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: categoryId
+          description: The ID of the new category for the transaction.
+          required: true
+          schema:
+            $ref: '#/definitions/ChangeCategory'
+        - in: path
+          name: transactionId
+          description: The ID of the transaction to be updated.
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Category updated successfully
+        '401':
+          description: Unauthorized request (missing or expired token)
+        '500':
+          description: Internal Server Error
+
+#----------------------------------------------------------
+#---Definitions for path already created
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -156,3 +304,81 @@ definitions:
     properties:
       userName:
         type: string
+  #-----------------------------------------
+  #--- These are the definitions for the paths propositions
+  TransactionHistory:
+    type: object
+    properties:
+      accounts:
+        type: string
+        description: the account associated with the transaction
+      date:
+        type: string
+        description: The date of the transaction ( dd/MM/yy format, exemple "27/02/20")
+      title: 
+        type: string
+        description: the title of the description 
+      amount: 
+        type: number
+        description: the transaction amount
+      transactionType:
+        type: string
+        description: he type of transaction ( electronic, transfert, income, ... )
+      category:
+        type: string
+        description: The category of the transaction
+        enum: 
+          - Food
+          - Transportation
+          - Medical
+          - Sport
+          - Shopping
+          - House
+          - Media
+          - Restaurant
+          - Travel
+          - Education
+          - Car
+          - Pets
+          - ...              
+      note:
+        type: string
+        description: A brief description of the transaction
+        #maxLenght: 150 
+                  
+  TransactionSummary:
+    type: object
+    properties:
+      accounts:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: the name of the account
+            amount:
+              type: number
+              description: the total amount for an account
+
+  AddTransactionNote:
+    type: object
+    properties:
+      note:
+        type: string
+        description: create a note to a transaction
+        #--maxLenght: 150 
+
+  DeletedNote:
+   type: object
+   properties: 
+     message:
+       type: string
+       description: A message informing about the result of the request
+  
+  ChangeCategory:
+    type: object
+    properties:
+      categoryId: 
+        type: string
+        description: The Id of the new category 

@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+// Import my file that gather all the style in scss
 import './main.scss';
-import reportWebVitals from './reportWebVitals';
 
-// Permet de connecter React with Redux en rendant le store disponible
+// Allow to connect React with Redux by making the store available
 import {Provider} from 'react-redux';  
-import store, { persistor } from './redux/store'; // ----- persistor
-import { PersistGate } from 'redux-persist/integration/react'; //-----
 
+// Persitor, allow to keep informations in the store even if the page is refreash  
+import store, { persistor } from './redux/store'; 
+
+// PersistGate help to process the persisting and rehydrating state
+import { PersistGate } from 'redux-persist/integration/react'; 
+
+// Import my rooter
 import Rooter from './rooter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,7 +27,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+

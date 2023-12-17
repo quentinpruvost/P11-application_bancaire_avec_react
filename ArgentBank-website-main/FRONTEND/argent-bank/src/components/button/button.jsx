@@ -1,10 +1,8 @@
-import {Link} from 'react-router-dom'
 
-function Button({text, linkTo, classStyle}){
+// This is my Button component used in the Account component
+function Button({text, classStyle}){
   return(
-    <Link to={linkTo} className='link-button'>
-      <button className={classStyle} >{text}</button>
-    </Link>
+    <button className={classStyle} >{text}</button>
   )
 }
 

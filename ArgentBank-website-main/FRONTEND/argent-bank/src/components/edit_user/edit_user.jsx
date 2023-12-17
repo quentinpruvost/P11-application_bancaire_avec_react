@@ -1,25 +1,35 @@
+// Import hooks from react and redux librairy
 import { useState } from "react" 
 import { useDispatch, useSelector } from "react-redux"; 
-import { changeUserName } from "../../redux/reducers/userEditSlice";
 
+import { changeUserName } from "../../redux/reducers-And-Fetchs/userEditFetch";
+
+
+// This is my Edit components that render the change of user Name in th User page
 function Edit({saveClick, cancelClick, firstName, lastName}){
 
   const dispatch = useDispatch(); 
-  const [newUserName, setNewUserName] = useState('') //----------
+  /**
+   * @variable newUserName - with initial value of : '',
+   * @function setNewUserName - change the state 
+   */
+  const [newUserName, setNewUserName] = useState('') 
+
+  //extract the userName from the store. 
   const userName = useSelector((state) => state.auth.userName)
 
-
-
-  console.log("newUserName : ", newUserName)
-
+  /**
+   * @function handleSaveClick - trigger the user Name change  
+   */
   function handleSaveClick(){
+    // check if the newUserName is empty and if empty the change is not done.
     if(newUserName.trim() === ""){
-
-    } else { //---------
+    } else { 
+      // dispatch the newUserName with the changeUserName action
       dispatch(changeUserName(newUserName))
+      // call the saveClick from the prop with newUserName for argument
       saveClick(newUserName)
     }
-    
   } 
    
   // -----------------
@@ -27,7 +37,7 @@ function Edit({saveClick, cancelClick, firstName, lastName}){
   return(
     <div className="edit">
       <h2>Edit user info</h2>
-      <form action="">
+      <form>
         <div className="field-edit">
           <label htmlFor="userName" className="label-edit">User Name:</label>
           <input 
@@ -35,7 +45,7 @@ function Edit({saveClick, cancelClick, firstName, lastName}){
             placeholder={userName}
             type="text" 
             id="userName"              
-            onChange={(e)=> setNewUserName(e.target.value)} //---------
+            onChange={(e)=> setNewUserName(e.target.value)} 
             required
           />
         </div>

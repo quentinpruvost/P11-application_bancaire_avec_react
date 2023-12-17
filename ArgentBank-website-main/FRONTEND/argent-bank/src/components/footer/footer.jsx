@@ -1,4 +1,4 @@
-
+// This is my Footer component that is rendered in every page 
 function Footer(){
   return(
     <footer className="footer">

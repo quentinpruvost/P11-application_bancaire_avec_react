@@ -1,7 +1,9 @@
+// Import the 3 logo from the folder 
 import IconChat from './icon-chat.png'
 import IconMoney from './icon-money.png'
 import IconSecurity from './icon-security.png'
 
+// This is my Features component that is rendered in the Home page 
 function Features(){
 
   return(

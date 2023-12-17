@@ -1,22 +1,29 @@
-
+// Import the components to build the user page
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import Welcome from "../../components/welcome/welcome";
 import Account from "../../components/account/account";
 import Edit from '../../components/edit_user/edit_user'
 
+// Import the hooks from React and redux librairie
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName } from "../../redux/reducers/userEditSlice";
-import { loginSuccess } from "../../redux/reducers/authSlice";
 
+// Import the actions from the Slices
+import { loginSuccess, logout } from "../../redux/reducers-And-Fetchs/authSlice";
 
+// Import persistor from the store
+import { persistor } from '../../redux/store';
+
+// My User components for rendering a page 
 function User(){
   const dispatch = useDispatch();
+
+  // Extract some elements in the store. 
   const userName = useSelector((state) => state.auth.userName)
   const firstName = useSelector((state) => state.auth.firstName )
   const lastName = useSelector((state) => state.auth.lastName )
-  console.log("userName : ", userName) 
+   
   /**
    * @variable isEditing - with initial value set to 'false'
    * @function setIsEditing - update the state 
@@ -30,39 +37,28 @@ function User(){
   function toggleEditing(){
     setIsEditing(!isEditing);
   }
-
-  const token = sessionStorage.getItem('token');
-  console.log("token : ", token)
-
-  // remove Token from the sessionStorage to clean it when a user logout. (console/Application/sessionStorage)
+ 
+  /**
+   * @function SignOut - Remove the token in Session Storage
+   * Send the logout action with dispatch 
+   * Clear the persisted state to remove the information extracted in the store.  
+   */
   function SignOut(){
     sessionStorage.removeItem('token')
+    dispatch(logout());
+    persistor.purge();
   }
 
-  //
-
-  const handleSaveUserName = (newUserName) => {
-    try {
-      const response = dispatch(changeName(newUserName));
-      const updatedUserName = response.payload;
-      dispatch(loginSuccess({ userName: updatedUserName, firstName, lastName }));
-      toggleEditing();
-    } catch (error) {
-      console.log('Error while updating userName: ', error);
-    }
-  }
-
-/**
-  const handleSaveUserName = (newUserName) => {
-    try{
-      dispatch(changeUserName(newUserName));
-      toggleEditing();
-    }catch(error){
-      console.log('Error while updating userName : ', error)
-    }
-  }
+  /**
+   * @function handleSaveUserName - Save the new User Name 
+   * @param (newUserName)  
    */
-   // ----------------------------------------------------
+  function handleSaveUserName(newUserName){
+    // Send the newUserName to the store with the loginSuccess action
+    dispatch(loginSuccess({userName: newUserName, firstName, lastName}))
+    // close the Edit component
+    toggleEditing();
+  }
 
   return(
     <div> 
@@ -86,7 +82,6 @@ function User(){
             saveClick={handleSaveUserName}
             firstName={firstName}
             lastName={lastName}
-            
           />
         )}
                
