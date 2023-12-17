@@ -10,10 +10,13 @@ function Login(){
   console.log(
     useSelector((store) => {console.log(store)})
   )
-
+ 
   return(
     <div>
       <Nav 
+        logoLink='/'
+        signInLink="/login"
+        iconLink='/login'
         Text="Sign In"
       />
       <main className="main bg-dark" >

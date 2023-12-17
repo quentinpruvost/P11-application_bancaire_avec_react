@@ -5,16 +5,19 @@ import './main.scss';
 import reportWebVitals from './reportWebVitals';
 
 // Permet de connecter React with Redux en rendant le store disponible
- import {Provider} from 'react-redux';  
- import store from './redux/store'; 
+import {Provider} from 'react-redux';  
+import store, { persistor } from './redux/store'; // ----- persistor
+import { PersistGate } from 'redux-persist/integration/react'; //-----
 
- import Rooter from './rooter';
+import Rooter from './rooter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Rooter /> 
+      <PersistGate loading={null} persistor={persistor} >
+        <Rooter /> 
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

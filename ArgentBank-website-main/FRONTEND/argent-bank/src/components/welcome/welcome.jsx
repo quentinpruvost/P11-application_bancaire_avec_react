@@ -1,10 +1,14 @@
 
 
-function Welcome({Name}){
+
+function Welcome({Name, onEditClick}){
   return(
     <div className="header">
       <h1>Welcome back<br />{Name}</h1>
-      <button className="edit-button">Edit Name</button>
+      <button className="edit-button" onClick={onEditClick}>Edit Name</button>
+      <div>
+         
+      </div>
     </div>
   )
 }
