@@ -4,6 +4,8 @@ import Hero from "../../components/hero/hero";
 import Features from "../../components/features/features"
 import Footer from "../../components/footer/footer";
 
+
+
 // This is the Home page components that gather other components
 function Home(){
   return(
@@ -16,7 +18,7 @@ function Home(){
           Text="Sign In"     
         />
         <Hero />
-        <Features />
+        <Features /> 
       </main>
       <Footer />
     </div>

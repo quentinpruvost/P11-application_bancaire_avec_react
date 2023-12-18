@@ -3,45 +3,36 @@ import IconChat from './icon-chat.png'
 import IconMoney from './icon-money.png'
 import IconSecurity from './icon-security.png'
 
-// This is my Features component that is rendered in the Home page 
-function Features(){
+import Feature from './feature'
 
+// This is my Features component with data. 
+function Features(){
+ 
   return(
     <section className="features">
-        <h2 className="sr-only">Features</h2>
-        <div className="feature-item">
-          <img src={IconChat} alt="Chat Icon" className="feature-icon" />
-          <h3 className="feature-item-title">You are our #1 priority</h3>
-          <p>
-            Need to talk to a representative? You can get in touch through our
-            24/7 chat or through a phone call in less than 5 minutes.
-          </p>
-        </div>
-        <div className="feature-item">
-          <img
-            src={IconMoney}
-            alt="Chat Icon"
-            className="feature-icon"
-          />
-          <h3 className="feature-item-title">More savings means higher rates</h3>
-          <p>
-            The more you save with us, the higher your interest rate will be!
-          </p>
-        </div>
-        <div className="feature-item">
-          <img
-            src={IconSecurity}
-            alt="Chat Icon"
-            className="feature-icon"
-          />
-          <h3 className="feature-item-title">Security you can trust</h3>
-          <p>
-            We use top of the line encryption to make sure your data and money
-            is always safe.
-          </p>
-        </div>
-      </section>
+    <h2 className="sr-only">Features</h2>
+      <Feature 
+        logo={IconChat}
+        title="You are our #1 priority"
+        description="Need to talk to a representative? You can get in touch through our
+        24/7 chat or through a phone call in less than 5 minutes."
+      />
+      <Feature 
+        logo={IconMoney}
+        title="More savings means higher rates"
+        description="The more you save with us, the higher your interest rate will be!"
+      />
+      <Feature 
+        logo={IconSecurity}
+        title="Security you can trust"
+        description="We use top of the line encryption to make sure your data and money
+        is always safe."
+      
+      />
+    </section>
+    
   )
 }
 
 export default Features
+

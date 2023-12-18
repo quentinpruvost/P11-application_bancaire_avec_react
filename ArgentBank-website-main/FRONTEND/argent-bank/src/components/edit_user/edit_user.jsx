@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"; 
 
 import { changeUserName } from "../../redux/reducers-And-Fetchs/userEditFetch";
+import { loginSuccess } from "../../redux/reducers-And-Fetchs/authSlice";
 
 
 // This is my Edit components that render the change of user Name in th User page
@@ -27,8 +28,10 @@ function Edit({saveClick, cancelClick, firstName, lastName}){
     } else { 
       // dispatch the newUserName with the changeUserName action
       dispatch(changeUserName(newUserName))
-      // call the saveClick from the prop with newUserName for argument
-      saveClick(newUserName)
+      // dispatch the new user Name to update the store 
+      dispatch(loginSuccess({userName: newUserName, firstName, lastName })) 
+      // call the saveClick from the prop that will trigger the toogleEdit
+      saveClick()
     }
   } 
    

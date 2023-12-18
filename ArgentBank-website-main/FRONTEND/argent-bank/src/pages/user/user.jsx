@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 // Import the actions from the Slices
-import { loginSuccess, logout } from "../../redux/reducers-And-Fetchs/authSlice";
+import { logout } from "../../redux/reducers-And-Fetchs/authSlice";
 
 // Import persistor from the store
 import { persistor } from '../../redux/store';
@@ -49,17 +49,6 @@ function User(){
     persistor.purge();
   }
 
-  /**
-   * @function handleSaveUserName - Save the new User Name 
-   * @param (newUserName)  
-   */
-  function handleSaveUserName(newUserName){
-    // Send the newUserName to the store with the loginSuccess action
-    dispatch(loginSuccess({userName: newUserName, firstName, lastName}))
-    // close the Edit component
-    toggleEditing();
-  }
-
   return(
     <div> 
       <Nav 
@@ -79,7 +68,7 @@ function User(){
         ) : (
           <Edit 
             cancelClick={toggleEditing} 
-            saveClick={handleSaveUserName}
+            saveClick={toggleEditing}
             firstName={firstName}
             lastName={lastName}
           />
